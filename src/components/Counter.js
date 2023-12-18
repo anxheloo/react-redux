@@ -1,25 +1,43 @@
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { counterActions } from "../store/index";
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter);
-  const toggleCounter = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const toggleCounter = useSelector((state) => state.counter.showCounter);
+
+  //OLD WAY WITHOUT REDUX TOOLKIT
+  // const incrementHandler = () => {
+  //   dispatch({ type: "increment" });
+  // };
+
+  // const increaseByAmount = (amount) => {
+  //   dispatch({ type: "increase", amount: amount });
+  // };
+
+  // const decrementHandler = () => {
+  //   dispatch({ type: "decrement" });
+  // };
+
+  // const toggleCounterHandler = () => {
+  //   dispatch({ type: "toggle" });
+  // };
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
-  };
-
-  const increaseByAmount = (amount) => {
-    dispatch({ type: "increase", amount: amount });
+    dispatch(counterActions.increment());
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement());
+  };
+
+  const increaseByAmount = (amount) => {
+    dispatch(counterActions.increase(amount));
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterActions.toggle());
   };
 
   return (
